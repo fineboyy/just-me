@@ -282,6 +282,14 @@
             </div>
           </div>
         </div>
+
+        <h1 style="height: 200px; width: 100%;"> Posts Length:  <%= posts.length %> </h1>
+
+        <%- include( "index_page_posts/row", { posts: posts.splice(0, 3), posts_meta:["vp", "vpr", "vp"]} ) %>
+        <%- include( "index_page_posts/row", { posts: posts.splice(0, 3), posts_meta:["hp", "hpr", "vp"]} ) %>
+        
+
+
       </div>
     </div>
   </section>
