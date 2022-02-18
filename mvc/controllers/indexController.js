@@ -8,7 +8,14 @@ const getHomePage = function(req, res) {
 }
 
 
+const getBlogPost = function({params}, res) {
+    let post = postData.find((val) =>  val.id == params.postid)
+    res.render("post", {title: post.title, post: post})
+}
+
+
 
 module.exports = {
-    getHomePage
+    getHomePage,
+    getBlogPost
 }

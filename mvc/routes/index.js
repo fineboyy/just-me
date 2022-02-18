@@ -7,4 +7,6 @@ const indexCtrl = require("../controllers/indexController")
 /* GET home page. */
 router.get('/', indexCtrl.getHomePage)
 
+router.get('/posts/:postid', indexCtrl.getBlogPost)
+
 module.exports = router;
