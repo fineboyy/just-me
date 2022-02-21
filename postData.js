@@ -622,5 +622,6 @@ function countComments(commentsArray) {
 
 
 module.exports = {
-    postData
+    postData,
+    author
 }

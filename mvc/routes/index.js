@@ -9,4 +9,7 @@ router.get('/', indexCtrl.getHomePage)
 
 router.get('/posts/:postid', indexCtrl.getBlogPost)
 
+router.get('/404', indexCtrl.get404)
+router.get('*', indexCtrl.redirectTo404)
+
 module.exports = router;
