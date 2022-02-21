@@ -37,7 +37,7 @@ let reverseDirection = post_meta.includes("vpr") ? " d-flex flex-column-reverse"
                     <span><i class="icon-calendar mr-2"></i><%= post.date %></span>
                     <span><a href="/posts/<%= post.id %>"><i
                                 class="icon-folder-o mr-2"></i><%= post.category %></a></span>
-                    <span><i class="icon-comment2 mr-2"></i><%= post.comments %> <%= post.comments === 1 ? "Comment" :  "Comments" %></span>
+                    <span><i class="icon-comment2 mr-2"></i><%= post.numOfComments %> <%= post.numOfComments === 1 ? "Comment" :  "Comments" %></span>
                 </p>
             </div>
             <p class="mb-4"><%= post.preview %></p>

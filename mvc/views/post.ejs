@@ -39,87 +39,40 @@
 
 
 			<div class="pt-5 mt-5">
-			  <h3 class="mb-5 font-weight-bold">6 Comments</h3>
+			  <h3 class="mb-5 font-weight-bold"><%= post.numOfComments %> <%= post.numOfComments === 1 ? "Comment" :  "Comments" %></h3>
+
 			  <ul class="comment-list">
-				<li class="comment">
-				  <div class="vcard bio">
-					<img src="/images/person_1.jpg" alt="Image placeholder">
-				  </div>
-				  <div class="comment-body">
-					<h3>John Doe</h3>
-					<div class="meta">October 03, 2018 at 2:21pm</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-					<p><a href="#" class="reply">Reply</a></p>
-				  </div>
-				</li>
+				  <% function printComments(commentsArray, isChild) { %>
 
-				<li class="comment">
-				  <div class="vcard bio">
-					<img src="/images/person_1.jpg" alt="Image placeholder">
-				  </div>
-				  <div class="comment-body">
-					<h3>John Doe</h3>
-					<div class="meta">October 03, 2018 at 2:21pm</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-					<p><a href="#" class="reply">Reply</a></p>
-				  </div>
-
-				  <ul class="children">
-					<li class="comment">
-					  <div class="vcard bio">
-						<img src="/images/person_1.jpg" alt="Image placeholder">
-					  </div>
-					  <div class="comment-body">
-						<h3>John Doe</h3>
-						<div class="meta">October 03, 2018 at 2:21pm</div>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-						<p><a href="#" class="reply">Reply</a></p>
-					  </div>
-
-
-					  <ul class="children">
-						<li class="comment">
-						  <div class="vcard bio">
-							<img src="/images/person_1.jpg" alt="Image placeholder">
-						  </div>
-						  <div class="comment-body">
-							<h3>John Doe</h3>
-							<div class="meta">October 03, 2018 at 2:21pm</div>
-							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-							<p><a href="#" class="reply">Reply</a></p>
-						  </div>
-
-							<ul class="children">
-							  <li class="comment">
+					<% if(isChild) { %> <ul class="children"> <% } %>
+						
+						<% for(let i = 0; i < commentsArray.length; i++) { %>
+							<li class="comment">
 								<div class="vcard bio">
-								  <img src="/images/person_1.jpg" alt="Image placeholder">
+									<img src="<%= commentsArray[i].userImg %>" alt="A user's image">
 								</div>
 								<div class="comment-body">
-								  <h3>John Doe</h3>
-								  <div class="meta">October 03, 2018 at 2:21pm</div>
-								  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-								  <p><a href="#" class="reply">Reply</a></p>
+									<h3><%= commentsArray[i].user %></h3>
+									<div class="meta"><%= commentsArray[i].date %></div>
+									<p><%= commentsArray[i].body %></p>
+									<p><a href="#" class="reply">Reply</a></p>
 								</div>
-							  </li>
-							</ul>
-						</li>
-					  </ul>
-					</li>
-				  </ul>
-				</li>
 
-				<li class="comment">
-				  <div class="vcard bio">
-					<img src="/images/person_1.jpg" alt="Image placeholder">
-				  </div>
-				  <div class="comment-body">
-					<h3>John Doe</h3>
-					<div class="meta">October 03, 2018 at 2:21pm</div>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-					<p><a href="#" class="reply">Reply</a></p>
-				  </div>
-				</li>
+								<% 
+									if(commentsArray[i].comments.length > 0) {
+										printComments(commentsArray[i].comments, true)
+									}
+								%>
+							</li>
+
+						<% } %>
+ 
+						<% if(isChild) { %> </ul> <% } %>
+					<% } %>
+
+					<% printComments(post.comments, false) %>
 			  </ul>
+			  
 			  <!-- END comment-list -->
 			  
 			  <div class="comment-form-wrap pt-5">
