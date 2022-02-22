@@ -1,3 +1,5 @@
+const shortid = require('shortid')
+
 
 let defaultImage = "/images/avatar.jpg";
 let person1 = {
@@ -598,17 +600,31 @@ let postData = [
         date: "Nov, 16, 2019"
     }
 ];
-
+let uniqueTags = new Set
+let categoryData = []
 
 
 
 for(let i = 0; i < postData.length; i++) {
-    let startingID = 842;
-    postData[i].id = startingID + i
+    postData[i].id = shortid.generate()
 
     postData[i].numOfComments = countComments(postData[i].comments)
-}
+    for(let j = 0; j < postData[i].tags.length; j++) {
+        uniqueTags.add(postData[i].tags[j])
+    }
 
+    var holder = holder || []
+
+    if(holder.includes(postData[i].category)) {
+        categoryData.forEach((val) => {
+            val.category === postData[i].category && val.amount++
+        })
+    } else {
+        holder.push(postData[i].category)
+        categoryData.push({category: postData[i].category, amount: 1})
+    }
+}
+uniqueTags = [...uniqueTags]
 
 function countComments(commentsArray) {
     let amount = 0
@@ -623,5 +639,7 @@ function countComments(commentsArray) {
 
 module.exports = {
     postData,
-    author
+    author,
+    uniqueTags,
+    categoryData
 }
