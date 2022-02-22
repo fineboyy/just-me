@@ -8,7 +8,7 @@ postData = postData.postData
 
 const getHomePage = function(req, res) {
     console.log(postData.length)
-    res.render("index", {title: "JustMe - The Blog Made Just For You", posts: postData})
+    res.render("index", {title: "JustMe - The Blog Made Just For You", posts: postData, active: "index"})
 }
 
 
@@ -22,11 +22,16 @@ const getBlogPost = function({params}, res) {
 }
 
 
+const getAboutPage = function (req, res) {
+    res.render("about", {title: "About Us | Just Me", active: "about"})
+}
+const getContactPage = function (req, res) {
+    res.render("contact", {title: "About Us | Just Me", active: "contact"})
+}
+
 const get404 = function(req, res) {
     res.render('404', {title: '404 - The Page You Requested Could Not Be Found'})
 }
-
-
 const redirectTo404 = function(req, res) {
     res.redirect("/404")
 }
@@ -36,6 +41,8 @@ const redirectTo404 = function(req, res) {
 module.exports = {
     getHomePage,
     getBlogPost,
+    getAboutPage,
+    getContactPage,
     get404,
     redirectTo404
 }
