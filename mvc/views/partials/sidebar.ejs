@@ -4,8 +4,14 @@
 			<nav id="colorlib-main-menu" role="navigation">
 				<ul>
 					<li <% if(locals.active && active === "index") { %> class="colorlib-active" <% } %> ><a href="/">Home</a></li>
-					<li <% if(locals.active && active === "travel") { %> class="colorlib-active" <% } %> ><a href="/">Travel</a></li>
-					<li <% if(locals.active && active === "lifestyle") { %> class="colorlib-active" <% } %> ><a href="/">Lifestyle</a></li>
+
+					<li class="text-white" style="cursor: default;">Blog</li>
+					<div class="ml-4">
+						<% for(let cat of categoryData) { %>
+							<li <% if(locals.active && active === cat.category ) { %> class="colorlib-active" <% } %> ><a href="/filter?category=<%= cat.category %>" class="text-capitalize"><%= cat.category %></a></li>
+						
+						<% } %>
+					</div>
 					<li <% if(locals.active && active === "about") { %> class="colorlib-active" <% } %> ><a href="/about">About</a></li>
 					<li <% if(locals.active && active === "contact") { %> class="colorlib-active" <% } %> ><a href="/contact">Contact</a></li>
 				</ul>

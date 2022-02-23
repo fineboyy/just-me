@@ -12,7 +12,7 @@
       <ul class="categories">
 
         <% for(let data of categoryData ) { %>
-          <li><a href="#" class="text-capitalize"><%= data.category %><span>(<%= data.amount %>)</span></a></li>
+          <li><a href="/filter?category=<%= data.category%>" class="text-capitalize"><%= data.category %><span>(<%= data.amount %>)</span></a></li>
 
 
         <% } %>

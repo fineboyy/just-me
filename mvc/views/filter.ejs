@@ -1,0 +1,61 @@
+<%- include('partials/header') %>
+
+<div id="colorlib-main">
+    <section class="ftco-section ftco-no-pt ftco-no-pb">
+    <div class="container px-0">
+        <div class="row no-gutters">
+
+            <% for(let post of posts) { %>
+                <div class="col-md-12 blog-wrap">
+                    <div class="row no-gutters align-items-center">
+                        <div class="col-md-6 img js-fullheight" style="background-image: url('images/<%= post.image %>');">
+                            
+                        </div>
+                        <div class="col-md-6">
+                            <div class="text p-md-5 p-4 ftco-animate">
+                                <div class="heading">
+                                    <div class="meta-wrap">
+                                            <p class="meta">
+                                  <span><i class="icon-calendar mr-2"></i><%= post.date %></span>
+                                  <span><a href="/posts/<%= post.id %>"><i class="icon-folder-o mr-2"></i>Travel</a></span>
+                                  <span><i class="icon-comment2 mr-2"></i><%= post.numOfComments %><%= + post.numOfComments === 1 ? " Comment" : " Comments" %></span>
+                              </p>
+                          </div>
+                                    <h2 class="mb-5"><a href="/posts/<%= post.id %>"><%= post.title %></a></h2>
+                                </div>
+
+                                <%
+                                    var pattern = new RegExp("^<p>[^<]")
+                                    for(let paragraph of post.body) {
+                                        if(pattern.test(paragraph)) {
+                                            var preview = paragraph
+                                            break;
+                                        }
+                                    }
+                                %>
+                                <p><%- preview.slice(0, 200) + '...' %></p>
+                                <div class="icon d-flex align-items-center my-5">
+                                    <div class="img" style="background-image: url('<%= author.img %>');"></div>
+                                    <div class="position pl-3">
+                                        <h4 class="mb-0"><%= author.name %></h4>
+                                        <span>fashion.com</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            <% } %>
+
+            
+        </div>
+    </div>
+</section>
+</div>
+
+
+
+
+<%- include('partials/footer') %>

@@ -9,6 +9,7 @@ router.get('/', indexCtrl.getHomePage)
 
 router.get('/about', indexCtrl.getAboutPage)
 router.get('/contact', indexCtrl.getContactPage)
+router.get('/filter', indexCtrl.getFilteredPosts)
 router.get('/posts/:postid', indexCtrl.getBlogPost)
 
 router.get('/404', indexCtrl.get404)
