@@ -42,7 +42,7 @@
       <h3 class="sidebar-heading">Tag Cloud</h3>
       <ul class="tagcloud">
         <% for(let tag of uniqueTags) { %>
-          <a href="#" class="tag-cloud-link"><%= tag %></a>
+          <a href="/filter?tag=<%= tag %>" class="tag-cloud-link"><%= tag %></a>
         <% } %>
       </ul>
     </div>

@@ -1,7 +1,7 @@
 <%- include('partials/header') %>
 
 <div id="colorlib-main">
-	<section class="ftco-section ftco-no-pt ftco-no-pb">
+	<section class="ftco-section ftco-no-pt ftco-no-pb mx-5">
 	<div class="container px-0">
 		<div class="row d-flex no-gutters">
 			<div class="col-lg-8 px-md-5 py-5">
@@ -15,14 +15,12 @@
 					
 					<% } %>
 			
-			<div class="tag-widget post-tag-container mb-5 mt-5">
+			<div class="w-100 tag-widget post-tag-container mb-5 mt-5">
 			  <div class="tagcloud">
 
 
-				<% for(let i = 0; i < post.tags.length; i++) { %>
-
-					<a href="#" class="tag-cloud-link"><%= post.tags[i] %></a>
-
+				<% for(let tag of post.tags) { %>
+					<a href="/filter?tag=<%= tag %>" class="tag-cloud-link"><%= tag %></a>
 				<% } %>
 			  </div>
 			</div>

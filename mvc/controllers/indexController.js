@@ -1,22 +1,26 @@
 let data = require('../../postData')
 
 
-let postAuthor = data.author
-const uniqueTags = data.uniqueTags
-let categoryData = data.categoryData
-postData = data.postData
+let postData = data.postData
 
 const recentPostsAmount = 6
 
+const defaultData = {
+    categoryData: data.categoryData,
+    author: data.author,
+    uniqueTags: data.uniqueTags,
+}
 
 const getHomePage = function(req, res) {
-    res.render("index", 
-    {
-        title: "JustMe - The Blog Made Just For You", 
-        posts: postData, 
-        active: "index",
-        categoryData: categoryData
-    })
+
+    let data = {
+        ...defaultData,
+        title:  "Just Me - The Blog Made Just For You",
+        posts: postData,
+        active: "index"
+    }
+
+    res.render("index", data)
 }
 
 
@@ -26,54 +30,63 @@ const getBlogPost = function({params}, res) {
     if(!post) {
         return res.redirect("/404")
     }
-    res.render("post", 
-    {
-        title: post.title, 
-        post: post, 
-        author: postAuthor, 
-        uniqueTags: uniqueTags, 
+
+    let data = {
+        ...defaultData,
+        title:  post.title,
+        post: post,
         recentPosts: postData.slice(0, recentPostsAmount),
-        categoryData: categoryData
-    })
+    }
+    res.render("post", data)
 }
 
 
 const getAboutPage = function (req, res) {
-    res.render("about", {
-        title: "About Us | Just Me", 
+
+    let data = {
+        ...defaultData,
+        title:  "About Us | Just Me",
         active: "about",
-        categoryData: categoryData
-    })
+        recentPosts: postData.slice(0, recentPostsAmount),
+    }
+
+    res.render("about", data)
 }
 const getContactPage = function (req, res) {
-    res.render("contact", {
-        title: "About Us | Just Me", 
-        active: "contact",
-        categoryData: categoryData
-    })
+
+    let data = {
+        ...defaultData,
+        title:  "Contact Us | Just Me",
+        active: "contact"
+    }
+    res.render("contact", data)
 }
 
 const getFilteredPosts = function({query}, res) {
 
-    let filteredPosts = postData.filter((val) => val.category == query.category)
-
-    res.render('filter', {
-        title: "Just Me - Filtered",
-        active: query.category,
-        categoryData: categoryData,
-        posts:  filteredPosts,
-        author: postAuthor
+    let filteredPosts = postData.filter((val) => {
+        return val.category == query.category || val.tags.includes(query.tag)
     })
+
+
+    let data = {
+        ...defaultData,
+        title:  "Just Me - Filtered",
+        active: query.category,
+        posts: filteredPosts,
+    }
+
+    res.render('filter', data)
 }
 
 const get404 = function(req, res) {
-    res.render('404', 
-    {
-        title: '404 - The Page You Requested Could Not Be Found', 
-        author: postAuthor, uniqueTags: uniqueTags, 
+
+    let data = {
+        ...defaultData,
+        title: '404 - The Page You Requested Could Not Be Found',
         recentPosts: postData.slice(0, recentPostsAmount),
-        categoryData: categoryData
-    })
+    }
+    res.render('404', data)
 }
 const redirectTo404 = function(req, res) {
     res.redirect("/404")

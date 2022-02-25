@@ -5,6 +5,15 @@
     <div class="container px-0">
         <div class="row no-gutters">
 
+            <% if(posts.length == 0) { %>
+                <div class="mt-5 mb-5 mx-5">
+                    <h1 class="font-weight-bold display-4">No Articles Found.</h1>
+                    <h4 class="font-weight-light">Go back to the <a href="/">hompage</a>?</h4>
+
+                </div>
+
+            <% } %>
+
             <% for(let post of posts) { %>
                 <div class="col-md-12 blog-wrap">
                     <div class="row no-gutters align-items-center">
@@ -17,7 +26,7 @@
                                     <div class="meta-wrap">
                                             <p class="meta">
                                   <span><i class="icon-calendar mr-2"></i><%= post.date %></span>
-                                  <span><a href="/posts/<%= post.id %>"><i class="icon-folder-o mr-2"></i>Travel</a></span>
+                                  <span><a class="text-capitalize" href="/filter?category=<%= post.category %>"><i class="icon-folder-o mr-2"></i><%= post.category %></a></span>
                                   <span><i class="icon-comment2 mr-2"></i><%= post.numOfComments %><%= + post.numOfComments === 1 ? " Comment" : " Comments" %></span>
                               </p>
                           </div>
