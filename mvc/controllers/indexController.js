@@ -8,7 +8,11 @@ const recentPostsAmount = 6
 const defaultData = {
     categoryData: data.categoryData,
     author: data.author,
+}
+
+const rightSidebarData = {
     uniqueTags: data.uniqueTags,
+    recentPosts: postData.slice(0, recentPostsAmount)
 }
 
 const getHomePage = function(req, res) {
@@ -33,9 +37,9 @@ const getBlogPost = function({params}, res) {
 
     let data = {
         ...defaultData,
+        ...rightSidebarData,
         title:  post.title,
         post: post,
-        recentPosts: postData.slice(0, recentPostsAmount),
     }
     res.render("post", data)
 }
@@ -84,7 +88,7 @@ const get404 = function(req, res) {
     let data = {
         ...defaultData,
         title: '404 - The Page You Requested Could Not Be Found',
-        recentPosts: postData.slice(0, recentPostsAmount),
+        ...rightSidebarData
     }
     res.render('404', data)
 }
